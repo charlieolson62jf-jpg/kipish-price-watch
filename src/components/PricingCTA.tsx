@@ -43,9 +43,9 @@ const PricingCTA = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsPaid(true)}
-          className={`inline-flex items-center gap-2.5 px-7 sm:px-9 py-4 text-sm sm:text-base font-bold transition-all tracking-wide ${
+          className={`inline-flex items-center gap-2.5 px-8 sm:px-10 py-4 text-sm sm:text-base font-bold transition-all tracking-wide ${
             isKipish
-              ? "rounded-sm bg-warning text-warning-foreground uppercase tracking-[0.15em] neon-yellow-blink"
+              ? "rounded-sm border-2 border-warning bg-warning/10 backdrop-blur-md text-warning uppercase tracking-[0.15em] neon-yellow-blink"
               : "rounded-full border-2 border-foreground/80 bg-card text-foreground hover:bg-foreground hover:text-card"
           }`}
         >

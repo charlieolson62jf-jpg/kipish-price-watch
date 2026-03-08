@@ -17,7 +17,7 @@ const Header = () => {
             : "border-b border-border/30 bg-background/80 backdrop-blur-xl"
         }`}
       >
-        <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 py-3.5">
+        <div className="container mx-auto flex items-center justify-between px-5 sm:px-8 lg:px-12 py-4">
           {/* Logo */}
           <AnimatePresence mode="wait">
             <motion.h1

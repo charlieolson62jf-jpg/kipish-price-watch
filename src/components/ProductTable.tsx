@@ -94,7 +94,7 @@ const ProductTable = () => {
       </motion.div>
 
       {/* Mobile Cards */}
-      <div className="flex flex-col gap-4 md:hidden">
+      <div className="flex flex-col gap-5 md:hidden">
         {filtered.map((product, i) => (
           <ProductCard key={product.id} product={product} index={i} />
         ))}
