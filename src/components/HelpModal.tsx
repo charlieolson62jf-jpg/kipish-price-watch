@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMode } from "@/contexts/ModeContext";
-import { X, Plus, Send, Moon } from "lucide-react";
+import { X, Crosshair, Send, Moon } from "lucide-react";
 
 interface HelpModalProps {
   open: boolean;
@@ -9,14 +9,14 @@ interface HelpModalProps {
 
 const steps = [
   {
-    icon: Plus,
+    icon: Crosshair,
     normal: "Добавьте артикулы WB и Ozon",
-    kipish: "ЗАКИНЬ АРТИКУЛЫ",
+    kipish: "ЗАБЕЙ АРТИКУЛ ВРАГА 🎯",
   },
   {
     icon: Send,
     normal: "Подключите Telegram-бота",
-    kipish: "ПОДРУБИ ТЕЛЕГУ",
+    kipish: "ПРИВЯЖИ ТЕЛЕГУ 📱",
   },
   {
     icon: Moon,
@@ -47,7 +47,7 @@ const HelpModal = ({ open, onClose }: HelpModalProps) => {
             className={`relative z-10 w-full max-w-md p-6 ${
               isKipish
                 ? "rounded-sm border border-primary/30 bg-card noise-bg neon-box"
-                : "rounded-2xl glass shadow-xl border border-border/50"
+                : "rounded-[2rem] glass shadow-xl border border-border/40"
             }`}
           >
             <button
@@ -63,7 +63,7 @@ const HelpModal = ({ open, onClose }: HelpModalProps) => {
               {isKipish ? "КАК ЭТО РАБОТАЕТ?" : "Как это работает?"}
             </h3>
 
-            <div className="space-y-5">
+            <div className="space-y-5 relative z-10">
               {steps.map((step, i) => (
                 <motion.div
                   key={i}
@@ -75,13 +75,13 @@ const HelpModal = ({ open, onClose }: HelpModalProps) => {
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center text-sm font-bold ${
                     isKipish
                       ? "rounded-sm border border-primary/30 bg-primary/10 text-primary"
-                      : "rounded-xl bg-primary/10 text-primary"
+                      : "rounded-2xl bg-primary/10 text-primary"
                   }`}>
                     {i + 1}
                   </div>
-                  <div>
+                  <div className="pt-2">
                     <p className={`text-sm font-medium ${
-                      isKipish ? "text-foreground" : "text-foreground"
+                      isKipish ? "text-foreground uppercase tracking-wider" : "text-foreground"
                     }`}>
                       {isKipish ? step.kipish : step.normal}
                     </p>

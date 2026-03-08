@@ -17,23 +17,25 @@ const ProductRow = ({ product, index }: ProductRowProps) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
       className={`transition-colors ${
-        isKipish ? "border-b border-border/30" : "border-b border-border"
+        isKipish ? "border-b border-border/20" : "border-b border-border/40"
       } ${
         product.status === "alert" && isKipish
           ? "bg-destructive/5"
           : isKipish ? "hover:bg-muted/20" : "hover:bg-muted/30"
       }`}
     >
+      {/* Articulы — lavender in kipish */}
       <td className={`px-5 py-4 font-mono text-sm ${
-        isKipish ? "text-secondary-foreground" : "text-foreground"
+        isKipish ? "text-secondary-foreground neon-text-pink" : "text-foreground"
       }`}>
         {product.artWb}
       </td>
       <td className={`px-5 py-4 font-mono text-sm ${
-        isKipish ? "text-secondary-foreground" : "text-foreground"
+        isKipish ? "text-secondary-foreground neon-text-pink" : "text-foreground"
       }`}>
         {product.artOzon}
       </td>
+      {/* Prices — cyan neon in kipish */}
       <td className={`px-5 py-4 text-right text-sm font-semibold ${
         isKipish ? "text-foreground neon-text-cyan" : "text-foreground"
       }`}>
@@ -72,29 +74,34 @@ export const ProductCard = ({ product, index }: ProductRowProps) => {
       transition={{ delay: index * 0.05 }}
       className={`p-4 transition-all ${
         isKipish
-          ? "rounded-sm border border-border/30 bg-card noise-bg"
-          : "rounded-2xl glass shadow-sm"
+          ? "rounded-sm border border-border/20 bg-card noise-bg"
+          : "rounded-[1.5rem] glass shadow-sm"
       } ${
         product.status === "alert" && isKipish ? "neon-border" : ""
       }`}
     >
-      {/* Status badge centered */}
-      <div className="mb-3 flex justify-center">
+      {/* Category + Status */}
+      <div className="mb-3 flex items-center justify-between relative z-10">
+        <span className={`text-[10px] font-semibold uppercase tracking-wider ${
+          isKipish ? "text-muted-foreground" : "text-muted-foreground"
+        }`}>
+          {product.category}
+        </span>
         <StatusBadge product={product} isKipish={isKipish} />
       </div>
 
       {/* WB vs Ozon side by side */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-3 relative z-10">
         <div className={`p-3 ${
           isKipish
-            ? "rounded-sm bg-muted/30 border border-border/30"
-            : "rounded-xl bg-muted/40"
+            ? "rounded-sm bg-muted/20 border border-border/20"
+            : "rounded-2xl bg-muted/40"
         }`}>
           <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">
             {isKipish ? "WB" : "Wildberries"}
           </p>
           <p className={`font-mono text-xs mb-1 ${
-            isKipish ? "text-secondary-foreground" : "text-muted-foreground"
+            isKipish ? "text-secondary-foreground neon-text-pink" : "text-muted-foreground"
           }`}>{product.artWb}</p>
           <p className={`text-lg font-bold ${
             isKipish ? "text-foreground neon-text-cyan" : "text-foreground"
@@ -102,14 +109,14 @@ export const ProductCard = ({ product, index }: ProductRowProps) => {
         </div>
         <div className={`p-3 ${
           isKipish
-            ? "rounded-sm bg-muted/30 border border-border/30"
-            : "rounded-xl bg-muted/40"
+            ? "rounded-sm bg-muted/20 border border-border/20"
+            : "rounded-2xl bg-muted/40"
         }`}>
           <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">
             {isKipish ? "OZON" : "Ozon"}
           </p>
           <p className={`font-mono text-xs mb-1 ${
-            isKipish ? "text-secondary-foreground" : "text-muted-foreground"
+            isKipish ? "text-secondary-foreground neon-text-pink" : "text-muted-foreground"
           }`}>{product.artOzon}</p>
           <p className={`text-lg font-bold ${
             isKipish ? "text-foreground neon-text-cyan" : "text-foreground"
@@ -118,7 +125,7 @@ export const ProductCard = ({ product, index }: ProductRowProps) => {
       </div>
 
       {/* Diff */}
-      <div className="mt-3 text-center">
+      <div className="mt-3 text-center relative z-10">
         <span className={`text-sm font-bold ${
           product.diff === 0
             ? "text-muted-foreground"
@@ -148,7 +155,7 @@ const StatusBadge = ({ product, isKipish }: { product: Product; isKipish: boolea
         }`}
       >
         <CheckCircle className="h-3.5 w-3.5" />
-        {isKipish ? "OK" : "Норма"}
+        {isKipish ? "ЧЁТКО" : "Норма"}
       </motion.span>
     ) : (
       <motion.span
