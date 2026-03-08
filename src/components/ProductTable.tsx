@@ -49,7 +49,7 @@ const ProductTable = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-10 pb-28 md:pb-10">
+    <div className="container mx-auto px-5 sm:px-8 lg:px-12 py-10 pb-28 md:pb-14">
       <StatusBanner hasAlert={hasAlert} />
       <TableActions onAddClick={() => setAddOpen(true)} />
 
