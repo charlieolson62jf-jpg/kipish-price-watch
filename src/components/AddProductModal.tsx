@@ -27,34 +27,34 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
           className="fixed inset-0 z-[60] flex items-center justify-center p-4"
           onClick={onClose}
         >
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className={`relative z-10 w-full max-w-md p-6 ${
+            className={`relative z-10 w-full max-w-md p-7 ${
               isKipish
                 ? "rounded-sm border border-primary/30 bg-card noise-bg neon-box"
-                : "rounded-[2rem] glass shadow-xl border border-border/40"
+                : "rounded-[2rem] bg-card luxury-shadow border border-border/30"
             }`}
           >
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+              className="absolute top-5 right-5 text-muted-foreground hover:text-foreground transition-colors"
             >
               <X className="h-5 w-5" />
             </button>
 
-            <h3 className={`font-display font-bold text-lg mb-6 ${
-              isKipish ? "uppercase tracking-wider text-primary neon-text" : "text-foreground"
+            <h3 className={`font-display font-bold text-xl mb-7 ${
+              isKipish ? "uppercase tracking-[0.15em] text-primary neon-text" : "tracking-wide text-foreground"
             }`}>
               {isKipish ? "ВЗЯТЬ НА ПРИЦЕЛ 🎯" : "Добавить товар"}
             </h3>
 
-            <div className="space-y-4 relative z-10">
+            <div className="space-y-5 relative z-10">
               <div>
-                <label className={`block text-xs font-semibold uppercase tracking-wider mb-1.5 ${
+                <label className={`block text-[10px] font-medium uppercase tracking-[0.15em] mb-2 ${
                   isKipish ? "text-secondary-foreground" : "text-muted-foreground"
                 }`}>
                   {isKipish ? "АРТИКУЛ WB" : "Артикул WB"}
@@ -65,13 +65,13 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
                   placeholder="WB-000000"
                   className={isKipish
                     ? "rounded-sm border-border bg-muted text-foreground font-mono placeholder:text-muted-foreground"
-                    : "rounded-2xl"
+                    : "rounded-2xl border-border/40 bg-background"
                   }
                 />
               </div>
 
               <div>
-                <label className={`block text-xs font-semibold uppercase tracking-wider mb-1.5 ${
+                <label className={`block text-[10px] font-medium uppercase tracking-[0.15em] mb-2 ${
                   isKipish ? "text-secondary-foreground" : "text-muted-foreground"
                 }`}>
                   {isKipish ? "АРТИКУЛ OZON" : "Артикул Ozon"}
@@ -82,13 +82,13 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
                   placeholder="OZ-0000000"
                   className={isKipish
                     ? "rounded-sm border-border bg-muted text-foreground font-mono placeholder:text-muted-foreground"
-                    : "rounded-2xl"
+                    : "rounded-2xl border-border/40 bg-background"
                   }
                 />
               </div>
 
               <div>
-                <label className={`block text-xs font-semibold uppercase tracking-wider mb-1.5 ${
+                <label className={`block text-[10px] font-medium uppercase tracking-[0.15em] mb-2 ${
                   isKipish ? "text-secondary-foreground" : "text-muted-foreground"
                 }`}>
                   {isKipish ? "КАТЕГОРИЯ" : "Категория"}
@@ -98,7 +98,7 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
                     <button
                       key={cat}
                       onClick={() => setCategory(cat)}
-                      className={`px-3 py-1.5 text-xs font-semibold transition-all ${
+                      className={`px-3 py-1.5 text-xs font-medium tracking-wide transition-all ${
                         isKipish
                           ? `rounded-sm border ${
                               category === cat
@@ -107,7 +107,7 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
                             }`
                           : `rounded-full ${
                               category === cat
-                                ? "bg-primary text-primary-foreground"
+                                ? "bg-foreground text-card"
                                 : "bg-muted text-muted-foreground"
                             }`
                       }`}
@@ -121,10 +121,10 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                className={`w-full mt-2 flex items-center justify-center gap-2 py-3 font-bold text-sm transition-all ${
+                className={`w-full mt-3 flex items-center justify-center gap-2 py-3.5 font-semibold text-sm transition-all tracking-wide ${
                   isKipish
-                    ? "rounded-sm border border-primary bg-primary/20 uppercase tracking-wider text-primary neon-box glow-pulse"
-                    : "rounded-2xl bg-primary text-primary-foreground shadow-md hover:shadow-lg"
+                    ? "rounded-sm border border-primary bg-primary/20 uppercase tracking-[0.15em] text-primary neon-box glow-pulse"
+                    : "rounded-2xl border-2 border-foreground/80 bg-card text-foreground hover:bg-foreground hover:text-card"
                 }`}
               >
                 <Crosshair className="h-4 w-4" />

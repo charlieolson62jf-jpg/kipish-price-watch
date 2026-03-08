@@ -49,7 +49,7 @@ const ProductTable = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-8 pb-28 md:pb-8">
+    <div className="container mx-auto px-4 sm:px-6 py-10 pb-28 md:pb-10">
       <StatusBanner hasAlert={hasAlert} />
       <TableActions onAddClick={() => setAddOpen(true)} />
 
@@ -59,23 +59,23 @@ const ProductTable = () => {
         onChange={setActiveCategory}
       />
 
-      {/* Desktop Table */}
+      {/* Desktop Table — no borders in normal mode */}
       <motion.div
         layout
         className={`overflow-hidden transition-all duration-500 hidden md:block ${
           isKipish
             ? "rounded-sm noise-bg"
-            : "rounded-[2rem] glass shadow-sm"
+            : "rounded-[2rem] bg-card luxury-shadow"
         }`}
       >
         <div className="overflow-x-auto relative z-10">
           <table className="w-full">
             <thead>
-              <tr className={isKipish ? "border-b border-border/30" : "border-b border-border/50"}>
+              <tr className={isKipish ? "border-b border-border/20" : ""}>
                 {headers.map((h) => (
                   <th
                     key={h.label}
-                    className={`px-5 py-3.5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground ${
+                    className={`px-5 py-4 text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground ${
                       h.align === "right" ? "text-right" : h.align === "center" ? "text-center" : "text-left"
                     }`}
                   >
@@ -111,7 +111,7 @@ const ProductTable = () => {
         className={`fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center shadow-xl md:hidden ${
           isKipish
             ? "rounded-sm border border-primary bg-primary/20 neon-box glow-pulse"
-            : "rounded-full bg-primary text-primary-foreground shadow-lg"
+            : "rounded-full bg-foreground text-card luxury-shadow"
         }`}
       >
         {isKipish ? <Target className="h-6 w-6 text-primary" /> : <Plus className="h-6 w-6" />}
