@@ -2,14 +2,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useMode } from "@/contexts/ModeContext";
 import { Plus, ShieldCheck, Target, Zap } from "lucide-react";
 
-const TableActions = () => {
+interface TableActionsProps {
+  onAddClick: () => void;
+}
+
+const TableActions = ({ onAddClick }: TableActionsProps) => {
   const { isKipish } = useMode();
 
   const normalTexts = {
     title: "Мониторинг индекса цен",
     subtitle: "Отслеживайте расхождения цен между площадками",
     addBtn: "Добавить товар",
-    protectBtn: "Активировать защиту (990₽/мес)",
+    protectBtn: "Активировать защиту — 990₽/мес",
   };
 
   const kipishTexts = {
@@ -30,14 +34,14 @@ const TableActions = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className={`font-display text-2xl font-bold ${
-              isKipish ? "uppercase tracking-widest neon-text" : "tracking-tight"
+            className={`font-display text-xl sm:text-2xl font-bold ${
+              isKipish ? "uppercase tracking-widest neon-text text-primary" : "tracking-tight text-foreground"
             }`}
           >
             {t.title}
           </motion.h2>
         </AnimatePresence>
-        <p className={`text-sm text-muted-foreground ${isKipish ? "font-display uppercase tracking-wider" : ""}`}>
+        <p className={`text-xs text-muted-foreground mt-1 ${isKipish ? "font-display uppercase tracking-wider" : ""}`}>
           {t.subtitle}
         </p>
       </div>
@@ -45,9 +49,10 @@ const TableActions = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={onAddClick}
           className={`hidden md:flex items-center gap-2 px-4 py-2.5 text-sm font-semibold transition-all ${
             isKipish
-              ? "rounded-none border border-primary bg-primary/20 uppercase tracking-wider text-primary neon-box"
+              ? "rounded-sm border border-primary bg-primary/20 uppercase tracking-wider text-primary neon-box"
               : "rounded-full bg-primary text-primary-foreground shadow-sm hover:shadow-md"
           }`}
         >
@@ -57,10 +62,10 @@ const TableActions = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`flex items-center gap-2 border px-4 py-2.5 font-semibold transition-all pulse-cta ${
+          className={`flex items-center gap-2 px-4 py-2.5 font-bold transition-all ${
             isKipish
-              ? "rounded-none border-warning/50 bg-warning/10 uppercase tracking-wider text-warning text-base"
-              : "rounded-full border-border bg-card text-foreground hover:bg-accent text-sm"
+              ? "rounded-sm border border-primary/50 bg-primary/10 uppercase tracking-wider text-primary text-sm glow-pulse"
+              : "rounded-full border border-border bg-card text-foreground hover:bg-accent text-xs sm:text-sm"
           }`}
         >
           {isKipish ? <Zap className="h-5 w-5" /> : <ShieldCheck className="h-4 w-4" />}

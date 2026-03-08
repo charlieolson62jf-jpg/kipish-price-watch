@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { useMode } from "@/contexts/ModeContext";
+import { Plus, Target } from "lucide-react";
+import { useState } from "react";
 import StatusBanner from "@/components/StatusBanner";
 import TableActions from "@/components/TableActions";
 import ProductRow, { ProductCard } from "@/components/ProductRow";
+import AddProductModal from "@/components/AddProductModal";
 
 export interface Product {
   id: number;
@@ -25,6 +28,7 @@ export const mockProducts: Product[] = [
 const ProductTable = () => {
   const { isKipish } = useMode();
   const hasAlert = mockProducts.some((p) => p.status === "alert");
+  const [addOpen, setAddOpen] = useState(false);
 
   const headers = [
     { label: isKipish ? "ART WB" : "Артикул WB", align: "left" },
@@ -38,25 +42,25 @@ const ProductTable = () => {
   return (
     <div className="container mx-auto px-4 sm:px-6 py-8 pb-28 md:pb-8">
       <StatusBanner hasAlert={hasAlert} />
-      <TableActions />
+      <TableActions onAddClick={() => setAddOpen(true)} />
 
       {/* Desktop Table */}
       <motion.div
         layout
-        className={`overflow-hidden border transition-all duration-500 hidden md:block ${
+        className={`overflow-hidden transition-all duration-500 hidden md:block ${
           isKipish
-            ? "rounded-none border-border neon-box"
-            : "rounded-2xl border-border shadow-sm"
+            ? "rounded-sm noise-bg"
+            : "rounded-2xl glass shadow-sm"
         }`}
       >
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto relative z-10">
           <table className="w-full">
             <thead>
-              <tr className={`border-b border-border ${isKipish ? "bg-muted" : "bg-muted/40"}`}>
+              <tr className={isKipish ? "border-b border-border/30" : "border-b border-border/50"}>
                 {headers.map((h) => (
                   <th
                     key={h.label}
-                    className={`px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground ${
+                    className={`px-5 py-3.5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground ${
                       h.align === "right" ? "text-right" : h.align === "center" ? "text-center" : "text-left"
                     }`}
                   >
@@ -81,20 +85,21 @@ const ProductTable = () => {
         ))}
       </div>
 
-      {/* Sticky mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 p-4 md:hidden">
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.97 }}
-          className={`w-full py-4 text-sm font-bold transition-all ${
-            isKipish
-              ? "rounded-none border-2 border-primary bg-primary/20 uppercase tracking-widest text-primary neon-box"
-              : "rounded-2xl bg-primary text-primary-foreground shadow-lg"
-          }`}
-        >
-          {isKipish ? "🎯 ВЗЯТЬ НА МУШКУ" : "＋ Добавить товар"}
-        </motion.button>
-      </div>
+      {/* FAB for mobile */}
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => setAddOpen(true)}
+        className={`fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center shadow-xl md:hidden ${
+          isKipish
+            ? "rounded-sm border border-primary bg-primary/20 neon-box glow-pulse"
+            : "rounded-full bg-primary text-primary-foreground shadow-lg"
+        }`}
+      >
+        {isKipish ? <Target className="h-6 w-6 text-primary" /> : <Plus className="h-6 w-6" />}
+      </motion.button>
+
+      <AddProductModal open={addOpen} onClose={() => setAddOpen(false)} />
     </div>
   );
 };

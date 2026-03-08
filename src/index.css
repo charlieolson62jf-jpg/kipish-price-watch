@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 99%;
+    --background: 220 16% 96%;
     --foreground: 220 20% 14%;
 
     --card: 0 0% 100%;
@@ -21,29 +21,35 @@
     --secondary: 220 14% 96%;
     --secondary-foreground: 220 20% 14%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 10% 50%;
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 10% 46%;
 
     --accent: 220 14% 96%;
     --accent-foreground: 220 65% 48%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 60% 62%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 142 70% 45%;
+    --success: 152 50% 52%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 38 92% 50%;
+    --warning: 38 80% 55%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 220 13% 90%;
+    --input: 220 13% 90%;
     --ring: 220 65% 54%;
 
-    --radius: 1.5rem;
+    --radius: 1.25rem;
 
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Neon colors for kipish (used in .kipish only) */
+    --neon-glow: 270 100% 60%;
+    --neon-red: 0 100% 50%;
+    --neon-cyan: 185 96% 81%;
+    --neon-lavender: 280 100% 84%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -57,23 +63,23 @@
 
   /* КИПИШ mode */
   .kipish {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 92%;
+    --background: 240 6% 6%;
+    --foreground: 185 96% 81%;
 
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 92%;
+    --card: 240 6% 9%;
+    --card-foreground: 185 96% 81%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 92%;
+    --popover: 240 6% 9%;
+    --popover-foreground: 185 96% 81%;
 
     --primary: 270 100% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 85%;
+    --secondary: 240 6% 14%;
+    --secondary-foreground: 280 100% 84%;
 
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 50%;
+    --muted: 240 6% 12%;
+    --muted-foreground: 240 5% 45%;
 
     --accent: 270 100% 15%;
     --accent-foreground: 270 100% 75%;
@@ -81,23 +87,20 @@
     --destructive: 0 90% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 142 70% 45%;
+    --success: 152 70% 50%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 0 0% 16%;
-    --input: 0 0% 16%;
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
     --ring: 270 100% 60%;
 
     --radius: 0px;
 
     --font-body: 'JetBrains Mono', monospace;
     --font-display: 'JetBrains Mono', monospace;
-
-    --neon-glow: 270 100% 60%;
-    --neon-red: 0 100% 50%;
   }
 }
 
@@ -109,7 +112,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
-    transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease, color 0.5s ease;
   }
 }
 
@@ -127,9 +130,15 @@
 
   .neon-text-red {
     text-shadow:
-      0 0 7px hsl(var(--neon-red, 0 100% 50%)),
-      0 0 20px hsl(var(--neon-red, 0 100% 50%)),
-      0 0 42px hsl(var(--neon-red, 0 100% 50%) / 0.5);
+      0 0 7px hsl(var(--neon-red)),
+      0 0 20px hsl(var(--neon-red)),
+      0 0 42px hsl(var(--neon-red) / 0.5);
+  }
+
+  .neon-text-cyan {
+    text-shadow:
+      0 0 6px hsl(var(--neon-cyan) / 0.6),
+      0 0 18px hsl(var(--neon-cyan) / 0.3);
   }
 
   .neon-box {
@@ -142,6 +151,33 @@
   .neon-border {
     border-color: hsl(var(--neon-glow));
     box-shadow: 0 0 8px hsl(var(--neon-glow) / 0.4);
+  }
+
+  .glass {
+    background: hsl(0 0% 100% / 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(0 0% 100% / 0.3);
+  }
+
+  .glass-dark {
+    background: hsl(240 6% 10% / 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(270 100% 60% / 0.15);
+  }
+
+  .noise-bg {
+    position: relative;
+  }
+  .noise-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
   }
 }
 
@@ -164,14 +200,9 @@
   animation: glitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-@keyframes scanline {
-  0% { top: -100%; }
-  100% { top: 100%; }
-}
-
 @keyframes pulse-red {
   0%, 100% { box-shadow: inset 0 0 80px hsl(0 100% 50% / 0); }
-  50% { box-shadow: inset 0 0 80px hsl(0 100% 50% / 0.12); }
+  50% { box-shadow: inset 0 0 80px hsl(0 100% 50% / 0.08); }
 }
 
 .pulse-red-alert {
@@ -185,6 +216,15 @@
 
 .blink-indicator {
   animation: blink 1s step-end infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px hsl(var(--neon-glow) / 0.4), 0 0 24px hsl(var(--neon-glow) / 0.2); }
+  50% { box-shadow: 0 0 16px hsl(var(--neon-glow) / 0.7), 0 0 48px hsl(var(--neon-glow) / 0.35); }
+}
+
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse-cta-glow {
