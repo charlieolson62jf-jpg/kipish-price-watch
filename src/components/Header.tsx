@@ -11,13 +11,13 @@ const Header = () => {
   return (
     <>
       <motion.header
-        className={`sticky top-0 z-50 border-b transition-all duration-500 ${
+        className={`sticky top-0 z-50 transition-all duration-500 ${
           isKipish
-            ? "border-border bg-card/95 backdrop-blur-xl noise-bg"
-            : "border-border/40 glass"
+            ? "border-b border-border bg-card/95 backdrop-blur-xl noise-bg"
+            : "border-b border-border/30 bg-background/80 backdrop-blur-xl"
         }`}
       >
-        <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
+        <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 py-3.5">
           {/* Logo */}
           <AnimatePresence mode="wait">
             <motion.h1
@@ -25,10 +25,10 @@ const Header = () => {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className={`font-display font-bold text-sm sm:text-lg shrink-0 ${
+              className={`font-display font-bold shrink-0 ${
                 isKipish
-                  ? "uppercase tracking-widest text-primary neon-text"
-                  : "tracking-tight text-foreground"
+                  ? "text-sm sm:text-lg uppercase tracking-widest text-primary neon-text"
+                  : "text-lg sm:text-xl tracking-wide text-foreground"
               }`}
             >
               {isKipish ? "OZON-КИПИШ" : "Ozon-Кипиш"}
@@ -37,8 +37,8 @@ const Header = () => {
 
           {/* Center Toggle */}
           <div className="flex items-center gap-2 sm:gap-3 absolute left-1/2 -translate-x-1/2">
-            <span className={`hidden sm:block text-xs uppercase tracking-wider transition-colors ${
-              !isKipish ? "font-semibold text-foreground" : "text-muted-foreground"
+            <span className={`hidden sm:block text-[11px] uppercase tracking-[0.15em] transition-colors ${
+              !isKipish ? "font-medium text-foreground" : "text-muted-foreground"
             }`}>
               Обычный
             </span>
@@ -48,17 +48,17 @@ const Header = () => {
               className={`relative h-8 w-16 sm:h-10 sm:w-20 border-2 transition-all duration-300 ${
                 isKipish
                   ? "rounded-sm border-primary glow-pulse"
-                  : "rounded-full border-border"
+                  : "rounded-full border-border/60"
               }`}
               style={{
-                backgroundColor: isKipish ? "hsl(240, 6%, 8%)" : "hsl(40, 20%, 90%)",
+                backgroundColor: isKipish ? "hsl(240, 6%, 8%)" : "hsl(40, 20%, 92%)",
               }}
             >
               <motion.div
                 className={`absolute top-1 h-4 w-4 sm:h-6 sm:w-6 ${isKipish ? "rounded-sm" : "rounded-full"}`}
                 animate={{
                   left: isKipish ? "calc(100% - 22px)" : "4px",
-                  backgroundColor: isKipish ? "hsl(270, 100%, 60%)" : "hsl(220, 55%, 50%)",
+                  backgroundColor: isKipish ? "hsl(270, 100%, 60%)" : "hsl(220, 10%, 12%)",
                   boxShadow: isKipish
                     ? "0 0 12px hsl(270 100% 60% / 0.8)"
                     : "0 1px 3px hsl(0 0% 0% / 0.1)",
@@ -73,7 +73,7 @@ const Header = () => {
                 initial={{ opacity: 0, x: 8 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -8 }}
-                className={`hidden sm:block text-xs uppercase tracking-wider font-bold ${
+                className={`hidden sm:block text-[11px] uppercase tracking-[0.15em] font-bold ${
                   isKipish ? "font-display text-primary neon-text" : "text-muted-foreground"
                 }`}
               >
@@ -101,7 +101,7 @@ const Header = () => {
               className={`text-xs sm:text-sm font-medium transition-all px-3 sm:px-5 py-2 ${
                 isKipish
                   ? "rounded-sm border border-primary bg-primary/10 uppercase tracking-wider text-primary neon-box"
-                  : "rounded-full border border-border bg-card text-foreground shadow-sm hover:shadow-md"
+                  : "rounded-full border border-foreground/20 bg-card text-foreground tracking-wide"
               }`}
             >
               {isKipish ? "ВОЙТИ" : "Войти"}

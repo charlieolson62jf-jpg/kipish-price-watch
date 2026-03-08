@@ -1,19 +1,23 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMode } from "@/contexts/ModeContext";
-import { Zap, ShieldCheck } from "lucide-react";
+import { Zap, ArrowRight } from "lucide-react";
+import { useState } from "react";
 
 const PricingCTA = () => {
   const { isKipish } = useMode();
+  const [isPaid, setIsPaid] = useState(false);
+
+  if (isPaid) return null;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className={`mt-8 p-6 sm:p-8 text-center transition-all duration-500 ${
+      className={`mt-10 p-8 sm:p-10 text-center transition-all duration-500 ${
         isKipish
-          ? "rounded-sm border border-border/30 bg-card noise-bg"
-          : "rounded-[2rem] glass shadow-sm"
+          ? "rounded-sm border border-border/20 bg-card noise-bg"
+          : "rounded-[2rem] bg-card luxury-shadow"
       }`}
     >
       <div className="relative z-10">
@@ -23,10 +27,10 @@ const PricingCTA = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`text-sm sm:text-base mb-5 ${
+            className={`mb-6 ${
               isKipish
-                ? "font-display uppercase tracking-wider text-foreground"
-                : "text-muted-foreground"
+                ? "font-display text-sm uppercase tracking-[0.2em] text-foreground"
+                : "font-display text-lg tracking-wide text-muted-foreground"
             }`}
           >
             {isKipish
@@ -38,14 +42,15 @@ const PricingCTA = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 text-sm sm:text-base font-extrabold transition-all pulse-cta-yellow ${
+          onClick={() => setIsPaid(true)}
+          className={`inline-flex items-center gap-2.5 px-7 sm:px-9 py-4 text-sm sm:text-base font-bold transition-all tracking-wide ${
             isKipish
-              ? "rounded-sm bg-warning text-warning-foreground uppercase tracking-wider border border-warning/60"
-              : "rounded-full bg-warning text-warning-foreground shadow-lg"
+              ? "rounded-sm bg-warning text-warning-foreground uppercase tracking-[0.15em] neon-yellow-blink"
+              : "rounded-full border-2 border-foreground/80 bg-card text-foreground hover:bg-foreground hover:text-card"
           }`}
         >
-          {isKipish ? <Zap className="h-5 w-5" /> : <ShieldCheck className="h-5 w-5" />}
-          ВРУБИТЬ ЗАЩИТУ — 990₽/МЕС
+          {isKipish ? <Zap className="h-5 w-5" /> : <ArrowRight className="h-4 w-4" />}
+          {isKipish ? "ВРУБИТЬ ЗАЩИТУ — 990₽/МЕС" : "Активировать защиту — 990₽/мес"}
         </motion.button>
       </div>
     </motion.div>
