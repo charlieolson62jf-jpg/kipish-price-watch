@@ -8,6 +8,7 @@ import AuthModal from "./AuthModal";
 const Header = () => {
   const { mode, setMode, isKipish } = useMode();
   const [helpOpen, setHelpOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
 
   return (
     <>
