@@ -119,6 +119,39 @@
     font-family: var(--font-body);
     transition: background-color 0.5s ease, color 0.5s ease;
   }
+
+  /* Themed thin scrollbar */
+  :root {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(40 15% 82%) transparent;
+  }
+  :root::-webkit-scrollbar {
+    width: 4px;
+  }
+  :root::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  :root::-webkit-scrollbar-thumb {
+    background: hsl(40 15% 82%);
+    border-radius: 99px;
+  }
+
+  .kipish {
+    scrollbar-color: hsl(270 100% 60% / 0.4) transparent;
+  }
+  .kipish::-webkit-scrollbar-thumb {
+    background: hsl(270 100% 60% / 0.4);
+  }
+
+  /* Hide scrollbar on mobile for native feel */
+  @media (max-width: 768px) {
+    :root {
+      scrollbar-width: none;
+    }
+    :root::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 @layer utilities {

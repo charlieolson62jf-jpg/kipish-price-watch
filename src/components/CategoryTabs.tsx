@@ -11,7 +11,7 @@ const CategoryTabs = ({ categories, active, onChange }: CategoryTabsProps) => {
   const { isKipish } = useMode();
 
   return (
-    <div className="mb-6 flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+    <div className="mb-6 flex gap-2 overflow-x-auto pb-1 no-scrollbar" style={{ WebkitOverflowScrolling: 'touch' }}>
       {categories.map((cat) => {
         const isActive = cat === active;
         return (
