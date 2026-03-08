@@ -122,6 +122,16 @@
 }
 
 @layer utilities {
+  /* Hide scrollbar utility */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+
   .font-display {
     font-family: var(--font-display);
   }
