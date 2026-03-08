@@ -16,7 +16,7 @@ const TableActions = () => {
     title: "ЧЕ ТАМ ПО ИНДЕКСУ?",
     subtitle: "[ СЛЕДИМ ЗА КАЖДЫМ ДВИЖЕНИЕМ ]",
     addBtn: "ВЗЯТЬ НА МУШКУ 🎯",
-    protectBtn: "ВРУБИТЬ ЗАЩИТУ ⚡",
+    protectBtn: "ВРУБИТЬ ЗАЩИТУ — 990₽/МЕС ⚡",
   };
 
   const t = isKipish ? kipishTexts : normalTexts;
@@ -45,7 +45,7 @@ const TableActions = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-semibold transition-all ${
+          className={`hidden md:flex items-center gap-2 px-4 py-2.5 text-sm font-semibold transition-all ${
             isKipish
               ? "rounded-none border border-primary bg-primary/20 uppercase tracking-wider text-primary neon-box"
               : "rounded-full bg-primary text-primary-foreground shadow-sm hover:shadow-md"
@@ -57,13 +57,13 @@ const TableActions = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`flex items-center gap-2 border px-4 py-2.5 text-sm font-semibold transition-all ${
+          className={`flex items-center gap-2 border px-4 py-2.5 font-semibold transition-all pulse-cta ${
             isKipish
-              ? "rounded-none border-warning/50 bg-warning/10 uppercase tracking-wider text-warning"
-              : "rounded-full border-border bg-card text-foreground hover:bg-accent"
+              ? "rounded-none border-warning/50 bg-warning/10 uppercase tracking-wider text-warning text-base"
+              : "rounded-full border-border bg-card text-foreground hover:bg-accent text-sm"
           }`}
         >
-          {isKipish ? <Zap className="h-4 w-4" /> : <ShieldCheck className="h-4 w-4" />}
+          {isKipish ? <Zap className="h-5 w-5" /> : <ShieldCheck className="h-4 w-4" />}
           {t.protectBtn}
         </motion.button>
       </div>

@@ -1,8 +1,8 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useMode } from "@/contexts/ModeContext";
 import StatusBanner from "@/components/StatusBanner";
 import TableActions from "@/components/TableActions";
-import ProductRow from "@/components/ProductRow";
+import ProductRow, { ProductCard } from "@/components/ProductRow";
 
 export interface Product {
   id: number;
@@ -36,14 +36,14 @@ const ProductTable = () => {
   ];
 
   return (
-    <div className="container mx-auto px-6 py-8">
+    <div className="container mx-auto px-4 sm:px-6 py-8 pb-28 md:pb-8">
       <StatusBanner hasAlert={hasAlert} />
       <TableActions />
 
-      {/* Table */}
+      {/* Desktop Table */}
       <motion.div
         layout
-        className={`overflow-hidden border transition-all duration-500 ${
+        className={`overflow-hidden border transition-all duration-500 hidden md:block ${
           isKipish
             ? "rounded-none border-border neon-box"
             : "rounded-2xl border-border shadow-sm"
@@ -73,6 +73,28 @@ const ProductTable = () => {
           </table>
         </div>
       </motion.div>
+
+      {/* Mobile Cards */}
+      <div className="flex flex-col gap-4 md:hidden">
+        {mockProducts.map((product, i) => (
+          <ProductCard key={product.id} product={product} index={i} />
+        ))}
+      </div>
+
+      {/* Sticky mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 p-4 md:hidden">
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
+          className={`w-full py-4 text-sm font-bold transition-all ${
+            isKipish
+              ? "rounded-none border-2 border-primary bg-primary/20 uppercase tracking-widest text-primary neon-box"
+              : "rounded-2xl bg-primary text-primary-foreground shadow-lg"
+          }`}
+        >
+          {isKipish ? "🎯 ВЗЯТЬ НА МУШКУ" : "＋ Добавить товар"}
+        </motion.button>
+      </div>
     </div>
   );
 };
