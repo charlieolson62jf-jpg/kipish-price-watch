@@ -8,6 +8,7 @@ import ProductRow, { ProductCard } from "@/components/ProductRow";
 import AddProductModal from "@/components/AddProductModal";
 import CategoryTabs from "@/components/CategoryTabs";
 import PricingCTA from "@/components/PricingCTA";
+import AuthModal from "@/components/AuthModal";
 
 export interface Product {
   id: number;
@@ -26,12 +27,31 @@ export const mockProducts: Product[] = [
   { id: 3, artWb: "WB-571839", artOzon: "OZ-4829103", priceWb: 890, priceOzon: 1190, diff: -300, status: "alert", category: "Одежда" },
 ];
 
-const categories = ["Все", "Электроника", "Дом", "Одежда"];
-
 const ProductTable = () => {
   const { isKipish } = useMode();
   const [addOpen, setAddOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Все");
+  const [categories, setCategories] = useState(["Все", "Электроника", "Дом", "Одежда"]);
+
+  // TODO: replace with real auth state from Supabase
+  const isLoggedIn = false;
+  // TODO: replace with real is_paid from Supabase user profile
+  const isPaid = false;
+
+  const handleAddClick = () => {
+    if (!isLoggedIn) {
+      setAuthOpen(true);
+      return;
+    }
+    setAddOpen(true);
+  };
+
+  const handleAddCategory = (name: string) => {
+    if (!categories.includes(name)) {
+      setCategories([...categories, name]);
+    }
+  };
 
   const filtered = activeCategory === "Все"
     ? mockProducts
@@ -51,15 +71,18 @@ const ProductTable = () => {
   return (
     <div className="container mx-auto px-5 sm:px-8 lg:px-12 py-10 pb-28 md:pb-14">
       <StatusBanner hasAlert={hasAlert} />
-      <TableActions onAddClick={() => setAddOpen(true)} />
+      <TableActions onAddClick={handleAddClick} />
 
       <CategoryTabs
         categories={categories}
         active={activeCategory}
         onChange={setActiveCategory}
+        isLoggedIn={isLoggedIn}
+        onAddCategory={handleAddCategory}
+        onRequestAuth={() => setAuthOpen(true)}
       />
 
-      {/* Desktop Table — no borders in normal mode */}
+      {/* Desktop Table */}
       <motion.div
         layout
         className={`overflow-hidden transition-all duration-500 hidden md:block ${
@@ -100,14 +123,14 @@ const ProductTable = () => {
         ))}
       </div>
 
-      {/* Pricing CTA */}
-      <PricingCTA />
+      {/* Pricing CTA — hidden only when is_paid from DB */}
+      <PricingCTA isPaid={isPaid} />
 
       {/* FAB for mobile */}
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setAddOpen(true)}
+        onClick={handleAddClick}
         className={`fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center shadow-xl md:hidden ${
           isKipish
             ? "rounded-sm border border-primary bg-primary/20 neon-box glow-pulse"
@@ -118,6 +141,7 @@ const ProductTable = () => {
       </motion.button>
 
       <AddProductModal open={addOpen} onClose={() => setAddOpen(false)} />
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </div>
   );
 };
