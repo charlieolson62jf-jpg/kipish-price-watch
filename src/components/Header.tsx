@@ -114,6 +114,7 @@ const Header = () => {
       </motion.header>
 
       <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </>
   );
 };

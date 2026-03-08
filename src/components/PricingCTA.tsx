@@ -14,7 +14,7 @@ const PricingCTA = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className={`mt-10 p-8 sm:p-10 text-center transition-all duration-500 ${
+      className={`mt-12 p-8 sm:p-12 text-center transition-all duration-500 ${
         isKipish
           ? "rounded-sm border border-border/20 bg-card noise-bg"
           : "rounded-[2rem] bg-card luxury-shadow"
