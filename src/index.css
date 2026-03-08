@@ -53,7 +53,7 @@
     --neon-red: 0 100% 50%;
     --neon-cyan: 185 96% 81%;
     --neon-pink: 330 100% 70%;
-    --neon-yellow: 75 100% 50%;
+    --neon-yellow: 48 100% 50%;
     --neon-lavender: 280 100% 84%;
 
     --sidebar-background: 0 0% 98%;
@@ -95,8 +95,8 @@
     --success: 152 70% 50%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 75 100% 50%;
-    --warning-foreground: 75 100% 10%;
+    --warning: 48 100% 50%;
+    --warning-foreground: 48 100% 10%;
 
     --border: 240 6% 16%;
     --input: 240 6% 16%;
@@ -228,20 +228,20 @@
   animation: glow-pulse 2s ease-in-out infinite;
 }
 
-/* Neon yellow blink + glow for CTA */
+/* Neon warm gold blink + glow for CTA */
 @keyframes neon-yellow-blink {
   0%, 100% {
     opacity: 1;
-    box-shadow: 0 0 10px hsl(var(--neon-yellow) / 0.5), 0 0 30px hsl(var(--neon-yellow) / 0.3), 0 0 60px hsl(var(--neon-yellow) / 0.15);
+    box-shadow: 0 0 12px hsl(var(--neon-yellow) / 0.4), 0 0 36px hsl(var(--neon-yellow) / 0.2), 0 0 72px hsl(var(--neon-yellow) / 0.1);
   }
   50% {
-    opacity: 0.85;
-    box-shadow: 0 0 20px hsl(var(--neon-yellow) / 0.8), 0 0 50px hsl(var(--neon-yellow) / 0.5), 0 0 90px hsl(var(--neon-yellow) / 0.25);
+    opacity: 0.9;
+    box-shadow: 0 0 24px hsl(var(--neon-yellow) / 0.6), 0 0 60px hsl(var(--neon-yellow) / 0.35), 0 0 100px hsl(var(--neon-yellow) / 0.2);
   }
 }
 
 .neon-yellow-blink {
-  animation: neon-yellow-blink 1.5s ease-in-out infinite;
+  animation: neon-yellow-blink 1.8s ease-in-out infinite;
 }
 
 @keyframes glitch-text {

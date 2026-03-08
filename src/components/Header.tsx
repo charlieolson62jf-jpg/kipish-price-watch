@@ -3,10 +3,12 @@ import { useMode } from "@/contexts/ModeContext";
 import { HelpCircle } from "lucide-react";
 import { useState } from "react";
 import HelpModal from "./HelpModal";
+import AuthModal from "./AuthModal";
 
 const Header = () => {
   const { mode, setMode, isKipish } = useMode();
   const [helpOpen, setHelpOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
 
   return (
     <>
@@ -17,7 +19,7 @@ const Header = () => {
             : "border-b border-border/30 bg-background/80 backdrop-blur-xl"
         }`}
       >
-        <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 py-3.5">
+        <div className="container mx-auto flex items-center justify-between px-5 sm:px-8 lg:px-12 py-4">
           {/* Logo */}
           <AnimatePresence mode="wait">
             <motion.h1
@@ -98,7 +100,8 @@ const Header = () => {
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className={`text-xs sm:text-sm font-medium transition-all px-3 sm:px-5 py-2 ${
+              onClick={() => setAuthOpen(true)}
+              className={`text-xs sm:text-sm font-medium transition-all px-4 sm:px-5 py-2.5 ${
                 isKipish
                   ? "rounded-sm border border-primary bg-primary/10 uppercase tracking-wider text-primary neon-box"
                   : "rounded-full border border-foreground/20 bg-card text-foreground tracking-wide"
@@ -111,6 +114,7 @@ const Header = () => {
       </motion.header>
 
       <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </>
   );
 };
