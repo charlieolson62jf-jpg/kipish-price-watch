@@ -100,7 +100,8 @@ const Header = () => {
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className={`text-xs sm:text-sm font-medium transition-all px-3 sm:px-5 py-2 ${
+              onClick={() => setAuthOpen(true)}
+              className={`text-xs sm:text-sm font-medium transition-all px-4 sm:px-5 py-2.5 ${
                 isKipish
                   ? "rounded-sm border border-primary bg-primary/10 uppercase tracking-wider text-primary neon-box"
                   : "rounded-full border border-foreground/20 bg-card text-foreground tracking-wide"
