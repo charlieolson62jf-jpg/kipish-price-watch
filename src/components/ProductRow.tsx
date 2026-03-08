@@ -16,18 +16,32 @@ const ProductRow = ({ product, index }: ProductRowProps) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className={`border-b border-border transition-colors last:border-0 hidden md:table-row ${
+      className={`transition-colors ${
+        isKipish ? "border-b border-border/30" : "border-b border-border"
+      } ${
         product.status === "alert" && isKipish
           ? "bg-destructive/5"
-          : "hover:bg-muted/30"
+          : isKipish ? "hover:bg-muted/20" : "hover:bg-muted/30"
       }`}
     >
-      <td className="px-5 py-4 font-mono text-sm text-foreground">{product.artWb}</td>
-      <td className="px-5 py-4 font-mono text-sm text-foreground">{product.artOzon}</td>
-      <td className="px-5 py-4 text-right text-sm font-medium text-foreground">
+      <td className={`px-5 py-4 font-mono text-sm ${
+        isKipish ? "text-secondary-foreground" : "text-foreground"
+      }`}>
+        {product.artWb}
+      </td>
+      <td className={`px-5 py-4 font-mono text-sm ${
+        isKipish ? "text-secondary-foreground" : "text-foreground"
+      }`}>
+        {product.artOzon}
+      </td>
+      <td className={`px-5 py-4 text-right text-sm font-semibold ${
+        isKipish ? "text-foreground neon-text-cyan" : "text-foreground"
+      }`}>
         {product.priceWb.toLocaleString("ru-RU")} ₽
       </td>
-      <td className="px-5 py-4 text-right text-sm font-medium text-foreground">
+      <td className={`px-5 py-4 text-right text-sm font-semibold ${
+        isKipish ? "text-foreground neon-text-cyan" : "text-foreground"
+      }`}>
         {product.priceOzon.toLocaleString("ru-RU")} ₽
       </td>
       <td
@@ -56,12 +70,12 @@ export const ProductCard = ({ product, index }: ProductRowProps) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className={`border border-border p-4 transition-all md:hidden ${
-        isKipish ? "rounded-none" : "rounded-2xl"
+      className={`p-4 transition-all ${
+        isKipish
+          ? "rounded-sm border border-border/30 bg-card noise-bg"
+          : "rounded-2xl glass shadow-sm"
       } ${
-        product.status === "alert" && isKipish
-          ? "bg-destructive/5 neon-border"
-          : "bg-card"
+        product.status === "alert" && isKipish ? "neon-border" : ""
       }`}
     >
       {/* Status badge centered */}
@@ -71,19 +85,35 @@ export const ProductCard = ({ product, index }: ProductRowProps) => {
 
       {/* WB vs Ozon side by side */}
       <div className="grid grid-cols-2 gap-3">
-        <div className={`border border-border p-3 ${isKipish ? "rounded-none bg-muted/30" : "rounded-xl bg-muted/20"}`}>
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+        <div className={`p-3 ${
+          isKipish
+            ? "rounded-sm bg-muted/30 border border-border/30"
+            : "rounded-xl bg-muted/40"
+        }`}>
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">
             {isKipish ? "WB" : "Wildberries"}
           </p>
-          <p className="font-mono text-xs text-foreground mb-1">{product.artWb}</p>
-          <p className="text-lg font-bold text-foreground">{product.priceWb.toLocaleString("ru-RU")} ₽</p>
+          <p className={`font-mono text-xs mb-1 ${
+            isKipish ? "text-secondary-foreground" : "text-muted-foreground"
+          }`}>{product.artWb}</p>
+          <p className={`text-lg font-bold ${
+            isKipish ? "text-foreground neon-text-cyan" : "text-foreground"
+          }`}>{product.priceWb.toLocaleString("ru-RU")} ₽</p>
         </div>
-        <div className={`border border-border p-3 ${isKipish ? "rounded-none bg-muted/30" : "rounded-xl bg-muted/20"}`}>
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+        <div className={`p-3 ${
+          isKipish
+            ? "rounded-sm bg-muted/30 border border-border/30"
+            : "rounded-xl bg-muted/40"
+        }`}>
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">
             {isKipish ? "OZON" : "Ozon"}
           </p>
-          <p className="font-mono text-xs text-foreground mb-1">{product.artOzon}</p>
-          <p className="text-lg font-bold text-foreground">{product.priceOzon.toLocaleString("ru-RU")} ₽</p>
+          <p className={`font-mono text-xs mb-1 ${
+            isKipish ? "text-secondary-foreground" : "text-muted-foreground"
+          }`}>{product.artOzon}</p>
+          <p className={`text-lg font-bold ${
+            isKipish ? "text-foreground neon-text-cyan" : "text-foreground"
+          }`}>{product.priceOzon.toLocaleString("ru-RU")} ₽</p>
         </div>
       </div>
 
@@ -113,7 +143,7 @@ const StatusBadge = ({ product, isKipish }: { product: Product; isKipish: boolea
         animate={{ scale: 1 }}
         className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold ${
           isKipish
-            ? "rounded-none border border-primary/30 bg-primary/20 uppercase tracking-wider text-primary"
+            ? "rounded-sm border border-success/30 bg-success/10 uppercase tracking-wider text-success"
             : "rounded-full bg-success/10 text-success"
         }`}
       >
@@ -127,7 +157,7 @@ const StatusBadge = ({ product, isKipish }: { product: Product; isKipish: boolea
         animate={{ scale: 1 }}
         className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold ${
           isKipish
-            ? "rounded-none border border-destructive/30 bg-destructive/20 uppercase tracking-wider text-destructive blink-indicator neon-text-red"
+            ? "rounded-sm border border-destructive/30 bg-destructive/10 uppercase tracking-wider text-destructive blink-indicator neon-text-red"
             : "rounded-full bg-destructive/10 text-destructive"
         }`}
       >
