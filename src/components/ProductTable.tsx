@@ -6,6 +6,8 @@ import StatusBanner from "@/components/StatusBanner";
 import TableActions from "@/components/TableActions";
 import ProductRow, { ProductCard } from "@/components/ProductRow";
 import AddProductModal from "@/components/AddProductModal";
+import CategoryTabs from "@/components/CategoryTabs";
+import PricingCTA from "@/components/PricingCTA";
 
 export interface Product {
   id: number;
@@ -15,20 +17,27 @@ export interface Product {
   priceOzon: number;
   diff: number;
   status: "ok" | "alert";
+  category: string;
 }
 
 export const mockProducts: Product[] = [
-  { id: 1, artWb: "WB-284712", artOzon: "OZ-1847291", priceWb: 2490, priceOzon: 2490, diff: 0, status: "ok" },
-  { id: 2, artWb: "WB-938471", artOzon: "OZ-7382910", priceWb: 1290, priceOzon: 1490, diff: 200, status: "ok" },
-  { id: 3, artWb: "WB-571839", artOzon: "OZ-4829103", priceWb: 890, priceOzon: 1190, diff: -300, status: "alert" },
-  { id: 4, artWb: "WB-129384", artOzon: "OZ-9381720", priceWb: 3990, priceOzon: 3990, diff: 0, status: "ok" },
-  { id: 5, artWb: "WB-847291", artOzon: "OZ-2918374", priceWb: 799, priceOzon: 990, diff: -191, status: "alert" },
+  { id: 1, artWb: "WB-284712", artOzon: "OZ-1847291", priceWb: 2490, priceOzon: 2490, diff: 0, status: "ok", category: "Электроника" },
+  { id: 2, artWb: "WB-938471", artOzon: "OZ-7382910", priceWb: 1290, priceOzon: 1490, diff: 200, status: "ok", category: "Дом" },
+  { id: 3, artWb: "WB-571839", artOzon: "OZ-4829103", priceWb: 890, priceOzon: 1190, diff: -300, status: "alert", category: "Одежда" },
 ];
+
+const categories = ["Все", "Электроника", "Дом", "Одежда"];
 
 const ProductTable = () => {
   const { isKipish } = useMode();
-  const hasAlert = mockProducts.some((p) => p.status === "alert");
   const [addOpen, setAddOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Все");
+
+  const filtered = activeCategory === "Все"
+    ? mockProducts
+    : mockProducts.filter((p) => p.category === activeCategory);
+
+  const hasAlert = filtered.some((p) => p.status === "alert");
 
   const headers = [
     { label: isKipish ? "ART WB" : "Артикул WB", align: "left" },
@@ -44,13 +53,19 @@ const ProductTable = () => {
       <StatusBanner hasAlert={hasAlert} />
       <TableActions onAddClick={() => setAddOpen(true)} />
 
+      <CategoryTabs
+        categories={categories}
+        active={activeCategory}
+        onChange={setActiveCategory}
+      />
+
       {/* Desktop Table */}
       <motion.div
         layout
         className={`overflow-hidden transition-all duration-500 hidden md:block ${
           isKipish
             ? "rounded-sm noise-bg"
-            : "rounded-2xl glass shadow-sm"
+            : "rounded-[2rem] glass shadow-sm"
         }`}
       >
         <div className="overflow-x-auto relative z-10">
@@ -70,7 +85,7 @@ const ProductTable = () => {
               </tr>
             </thead>
             <tbody>
-              {mockProducts.map((product, i) => (
+              {filtered.map((product, i) => (
                 <ProductRow key={product.id} product={product} index={i} />
               ))}
             </tbody>
@@ -80,10 +95,13 @@ const ProductTable = () => {
 
       {/* Mobile Cards */}
       <div className="flex flex-col gap-4 md:hidden">
-        {mockProducts.map((product, i) => (
+        {filtered.map((product, i) => (
           <ProductCard key={product.id} product={product} index={i} />
         ))}
       </div>
+
+      {/* Pricing CTA */}
+      <PricingCTA />
 
       {/* FAB for mobile */}
       <motion.button

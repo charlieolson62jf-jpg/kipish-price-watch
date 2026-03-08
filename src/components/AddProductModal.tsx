@@ -9,10 +9,13 @@ interface AddProductModalProps {
   onClose: () => void;
 }
 
+const categoryOptions = ["Электроника", "Дом", "Одежда"];
+
 const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
   const { isKipish } = useMode();
   const [artWb, setArtWb] = useState("");
   const [artOzon, setArtOzon] = useState("");
+  const [category, setCategory] = useState(categoryOptions[0]);
 
   return (
     <AnimatePresence>
@@ -33,7 +36,7 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
             className={`relative z-10 w-full max-w-md p-6 ${
               isKipish
                 ? "rounded-sm border border-primary/30 bg-card noise-bg neon-box"
-                : "rounded-2xl glass shadow-xl border border-border/50"
+                : "rounded-[2rem] glass shadow-xl border border-border/40"
             }`}
           >
             <button
@@ -49,7 +52,7 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
               {isKipish ? "ВЗЯТЬ НА ПРИЦЕЛ 🎯" : "Добавить товар"}
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-4 relative z-10">
               <div>
                 <label className={`block text-xs font-semibold uppercase tracking-wider mb-1.5 ${
                   isKipish ? "text-secondary-foreground" : "text-muted-foreground"
@@ -62,7 +65,7 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
                   placeholder="WB-000000"
                   className={isKipish
                     ? "rounded-sm border-border bg-muted text-foreground font-mono placeholder:text-muted-foreground"
-                    : "rounded-xl"
+                    : "rounded-2xl"
                   }
                 />
               </div>
@@ -79,9 +82,40 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
                   placeholder="OZ-0000000"
                   className={isKipish
                     ? "rounded-sm border-border bg-muted text-foreground font-mono placeholder:text-muted-foreground"
-                    : "rounded-xl"
+                    : "rounded-2xl"
                   }
                 />
+              </div>
+
+              <div>
+                <label className={`block text-xs font-semibold uppercase tracking-wider mb-1.5 ${
+                  isKipish ? "text-secondary-foreground" : "text-muted-foreground"
+                }`}>
+                  {isKipish ? "КАТЕГОРИЯ" : "Категория"}
+                </label>
+                <div className="flex gap-2 flex-wrap">
+                  {categoryOptions.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setCategory(cat)}
+                      className={`px-3 py-1.5 text-xs font-semibold transition-all ${
+                        isKipish
+                          ? `rounded-sm border ${
+                              category === cat
+                                ? "border-primary bg-primary/20 text-primary"
+                                : "border-border bg-muted/30 text-muted-foreground"
+                            }`
+                          : `rounded-full ${
+                              category === cat
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-muted text-muted-foreground"
+                            }`
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <motion.button
@@ -90,7 +124,7 @@ const AddProductModal = ({ open, onClose }: AddProductModalProps) => {
                 className={`w-full mt-2 flex items-center justify-center gap-2 py-3 font-bold text-sm transition-all ${
                   isKipish
                     ? "rounded-sm border border-primary bg-primary/20 uppercase tracking-wider text-primary neon-box glow-pulse"
-                    : "rounded-xl bg-primary text-primary-foreground shadow-md hover:shadow-lg"
+                    : "rounded-2xl bg-primary text-primary-foreground shadow-md hover:shadow-lg"
                 }`}
               >
                 <Crosshair className="h-4 w-4" />

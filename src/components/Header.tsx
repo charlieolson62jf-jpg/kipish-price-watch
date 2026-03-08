@@ -14,7 +14,7 @@ const Header = () => {
         className={`sticky top-0 z-50 border-b transition-all duration-500 ${
           isKipish
             ? "border-border bg-card/95 backdrop-blur-xl noise-bg"
-            : "border-border/50 glass"
+            : "border-border/40 glass"
         }`}
       >
         <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
@@ -25,7 +25,7 @@ const Header = () => {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className={`font-display font-bold text-sm sm:text-lg ${
+              className={`font-display font-bold text-sm sm:text-lg shrink-0 ${
                 isKipish
                   ? "uppercase tracking-widest text-primary neon-text"
                   : "tracking-tight text-foreground"
@@ -36,8 +36,7 @@ const Header = () => {
           </AnimatePresence>
 
           {/* Center Toggle */}
-          <div className="flex items-center gap-2">
-            {/* Desktop labels */}
+          <div className="flex items-center gap-2 sm:gap-3 absolute left-1/2 -translate-x-1/2">
             <span className={`hidden sm:block text-xs uppercase tracking-wider transition-colors ${
               !isKipish ? "font-semibold text-foreground" : "text-muted-foreground"
             }`}>
@@ -46,20 +45,20 @@ const Header = () => {
 
             <button
               onClick={() => setMode(isKipish ? "normal" : "kipish")}
-              className={`relative h-9 w-[4.5rem] sm:h-10 sm:w-20 border-2 transition-all duration-300 ${
+              className={`relative h-8 w-16 sm:h-10 sm:w-20 border-2 transition-all duration-300 ${
                 isKipish
                   ? "rounded-sm border-primary glow-pulse"
                   : "rounded-full border-border"
               }`}
               style={{
-                backgroundColor: isKipish ? "hsl(240, 6%, 8%)" : "hsl(220, 14%, 92%)",
+                backgroundColor: isKipish ? "hsl(240, 6%, 8%)" : "hsl(40, 20%, 90%)",
               }}
             >
               <motion.div
-                className={`absolute top-1 h-5 w-5 sm:h-6 sm:w-6 ${isKipish ? "rounded-sm" : "rounded-full"}`}
+                className={`absolute top-1 h-4 w-4 sm:h-6 sm:w-6 ${isKipish ? "rounded-sm" : "rounded-full"}`}
                 animate={{
-                  left: isKipish ? "calc(100% - 24px)" : "4px",
-                  backgroundColor: isKipish ? "hsl(270, 100%, 60%)" : "hsl(220, 65%, 54%)",
+                  left: isKipish ? "calc(100% - 22px)" : "4px",
+                  backgroundColor: isKipish ? "hsl(270, 100%, 60%)" : "hsl(220, 55%, 50%)",
                   boxShadow: isKipish
                     ? "0 0 12px hsl(270 100% 60% / 0.8)"
                     : "0 1px 3px hsl(0 0% 0% / 0.1)",
@@ -84,7 +83,7 @@ const Header = () => {
           </div>
 
           {/* Right: help + auth */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => setHelpOpen(true)}
               className={`flex items-center justify-center h-9 w-9 rounded-full transition-colors ${

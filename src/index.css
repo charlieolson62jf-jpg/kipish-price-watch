@@ -6,41 +6,42 @@
 
 @layer base {
   :root {
-    --background: 220 16% 96%;
-    --foreground: 220 20% 14%;
+    /* Premium Sand / Apple style */
+    --background: 40 20% 96%;
+    --foreground: 220 10% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 14%;
+    --card: 40 30% 98%;
+    --card-foreground: 220 10% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 14%;
+    --popover: 40 30% 98%;
+    --popover-foreground: 220 10% 12%;
 
-    --primary: 220 65% 54%;
+    --primary: 220 55% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 20% 14%;
+    --secondary: 40 15% 94%;
+    --secondary-foreground: 220 10% 20%;
 
-    --muted: 220 14% 94%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 40 12% 92%;
+    --muted-foreground: 220 8% 50%;
 
-    --accent: 220 14% 96%;
-    --accent-foreground: 220 65% 48%;
+    --accent: 40 20% 94%;
+    --accent-foreground: 220 55% 45%;
 
-    --destructive: 0 60% 62%;
+    --destructive: 0 50% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 152 50% 52%;
+    --success: 152 40% 48%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 38 80% 55%;
-    --warning-foreground: 0 0% 100%;
+    --warning: 42 90% 55%;
+    --warning-foreground: 42 90% 12%;
 
-    --border: 220 13% 90%;
-    --input: 220 13% 90%;
-    --ring: 220 65% 54%;
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 220 55% 50%;
 
-    --radius: 1.25rem;
+    --radius: 2rem;
 
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -49,6 +50,7 @@
     --neon-glow: 270 100% 60%;
     --neon-red: 0 100% 50%;
     --neon-cyan: 185 96% 81%;
+    --neon-pink: 330 100% 70%;
     --neon-lavender: 280 100% 84%;
 
     --sidebar-background: 0 0% 98%;
@@ -90,8 +92,8 @@
     --success: 152 70% 50%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
+    --warning: 42 92% 55%;
+    --warning-foreground: 42 92% 10%;
 
     --border: 240 6% 18%;
     --input: 240 6% 18%;
@@ -141,6 +143,12 @@
       0 0 18px hsl(var(--neon-cyan) / 0.3);
   }
 
+  .neon-text-pink {
+    text-shadow:
+      0 0 6px hsl(var(--neon-pink) / 0.6),
+      0 0 18px hsl(var(--neon-pink) / 0.3);
+  }
+
   .neon-box {
     box-shadow:
       0 0 10px hsl(var(--neon-glow) / 0.3),
@@ -154,10 +162,10 @@
   }
 
   .glass {
-    background: hsl(0 0% 100% / 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid hsl(0 0% 100% / 0.3);
+    background: hsl(40 30% 98% / 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(40 30% 90% / 0.5);
   }
 
   .glass-dark {
@@ -202,7 +210,7 @@
 
 @keyframes pulse-red {
   0%, 100% { box-shadow: inset 0 0 80px hsl(0 100% 50% / 0); }
-  50% { box-shadow: inset 0 0 80px hsl(0 100% 50% / 0.08); }
+  50% { box-shadow: inset 0 0 80px hsl(0 100% 50% / 0.06); }
 }
 
 .pulse-red-alert {
@@ -227,11 +235,22 @@
   animation: glow-pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse-cta-glow {
-  0%, 100% { box-shadow: 0 0 6px hsl(38 92% 50% / 0.3); }
-  50% { box-shadow: 0 0 20px hsl(38 92% 50% / 0.6), 0 0 40px hsl(38 92% 50% / 0.3); }
+@keyframes pulse-cta-yellow {
+  0%, 100% { box-shadow: 0 0 8px hsl(42 92% 55% / 0.4), 0 0 24px hsl(42 92% 55% / 0.2); }
+  50% { box-shadow: 0 0 20px hsl(42 92% 55% / 0.7), 0 0 50px hsl(42 92% 55% / 0.35); }
 }
 
-.pulse-cta {
-  animation: pulse-cta-glow 2s ease-in-out infinite;
+.pulse-cta-yellow {
+  animation: pulse-cta-yellow 2s ease-in-out infinite;
+}
+
+@keyframes glitch-text {
+  0%, 100% { text-shadow: 0 0 7px hsl(var(--neon-glow)), 0 0 20px hsl(var(--neon-glow)); }
+  25% { text-shadow: -2px 0 hsl(var(--neon-cyan)), 2px 0 hsl(var(--neon-pink)); }
+  50% { text-shadow: 2px 0 hsl(var(--neon-pink)), -2px 0 hsl(var(--neon-cyan)); }
+  75% { text-shadow: 0 0 10px hsl(var(--neon-glow)), -1px 1px hsl(var(--neon-pink)); }
+}
+
+.glitch-text-loop {
+  animation: glitch-text 3s ease-in-out infinite;
 }

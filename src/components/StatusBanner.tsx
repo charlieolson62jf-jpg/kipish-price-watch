@@ -10,17 +10,6 @@ interface StatusBannerProps {
 const StatusBanner = ({ hasAlert }: StatusBannerProps) => {
   const { isKipish } = useMode();
 
-  const normalTexts = {
-    statusOk: "Все показатели в норме",
-    statusAlert: "Обнаружено расхождение цен",
-  };
-
-  const kipishTexts = {
-    statusOk: "ВСЁ ЧЁТКО, ОЗОН СПИТ 😴",
-    statusAlert: "🚨 ШУХЕР! НА ВБ ДЕШЕВЛЕ! ИСПРАВЛЯЙ!",
-  };
-
-  const t = isKipish ? kipishTexts : normalTexts;
   const alertCount = mockProducts.filter((p) => p.status === "alert").length;
 
   return (
@@ -32,7 +21,7 @@ const StatusBanner = ({ hasAlert }: StatusBannerProps) => {
         exit={{ opacity: 0, y: -20, scale: 0.95 }}
         transition={{ duration: 0.4 }}
         className={`mb-8 p-5 transition-all duration-500 ${
-          isKipish ? "rounded-sm" : "rounded-2xl"
+          isKipish ? "rounded-sm" : "rounded-[2rem]"
         } ${
           hasAlert
             ? isKipish
@@ -51,7 +40,7 @@ const StatusBanner = ({ hasAlert }: StatusBannerProps) => {
               }`}
             />
           ) : (
-            <CheckCircle className={`h-5 w-5 ${isKipish ? "text-success" : "text-success"}`} />
+            <CheckCircle className="h-5 w-5 text-success" />
           )}
           <div>
             <h2
@@ -59,7 +48,13 @@ const StatusBanner = ({ hasAlert }: StatusBannerProps) => {
                 isKipish ? "text-base uppercase tracking-wider" : "text-sm"
               } ${hasAlert && isKipish ? "neon-text-red text-destructive" : "text-foreground"}`}
             >
-              {hasAlert ? t.statusAlert : t.statusOk}
+              {hasAlert
+                ? isKipish
+                  ? "🚨 ШУХЕР! НА ВБ ДЕШЕВЛЕ! ИСПРАВЛЯЙ!"
+                  : "Обнаружено расхождение цен"
+                : isKipish
+                  ? "ВСЁ ЧЁТКО, ОЗОН СПИТ 😴"
+                  : "Показатели в норме"}
             </h2>
             <p className="text-xs text-muted-foreground mt-0.5">
               {alertCount} из {mockProducts.length}{" "}
