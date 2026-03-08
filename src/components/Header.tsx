@@ -3,6 +3,7 @@ import { useMode } from "@/contexts/ModeContext";
 import { HelpCircle } from "lucide-react";
 import { useState } from "react";
 import HelpModal from "./HelpModal";
+import AuthModal from "./AuthModal";
 
 const Header = () => {
   const { mode, setMode, isKipish } = useMode();
